@@ -6,8 +6,8 @@ router = DefaultRouter()
 router.register(r'alerts', views.AlertViewSet)
 
 urlpatterns = [
-    path('telemetry/', views.telemetry_create, name='telemetry-create'),
-    path('telemetry/bulk/', views.telemetry_bulk, name='telemetry-bulk'),
+    path('telemetry/', views.telemetry_create, name='telemetry-create'), # use for single data
+    path('telemetry/bulk/', views.telemetry_bulk, name='telemetry-bulk'), # use for multiple data
     path('parking-log/', views.parking_log_create, name='parking-log-create'),
     path('dashboard/summary/', views.dashboard_summary, name='dashboard-summary'),
     path('dashboard/hourly/', views.hourly_usage, name='hourly-usage'),

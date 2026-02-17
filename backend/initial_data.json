@@ -1,0 +1,76 @@
+[
+  {
+    "model": "parking.facility",
+    "pk": 1,
+    "fields": {
+      "name": "Main Parking",
+      "location": "Downtown"
+    }
+  },
+  {
+    "model": "parking.zone",
+    "pk": 1,
+    "fields": {
+      "facility": 1,
+      "name": "B1",
+      "description": "Basement 1"
+    }
+  },
+  {
+    "model": "parking.zone",
+    "pk": 2,
+    "fields": {
+      "facility": 1,
+      "name": "VIP",
+      "description": "VIP area"
+    }
+  },
+  {
+    "model": "parking.device",
+    "pk": 1,
+    "fields": {
+      "code": "PARK-B1-S001",
+      "zone": 1,
+      "is_active": true,
+      "installed_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parking.device",
+    "pk": 2,
+    "fields": {
+      "code": "PARK-B1-S002",
+      "zone": 1,
+      "is_active": true,
+      "installed_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parking.device",
+    "pk": 3,
+    "fields": {
+      "code": "PARK-VIP-S001",
+      "zone": 2,
+      "is_active": true,
+      "installed_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parking.zonetarget",
+    "pk": 1,
+    "fields": {
+      "zone": 1,
+      "daily_target_occupancy": 50,
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parking.zonetarget",
+    "pk": 2,
+    "fields": {
+      "zone": 2,
+      "daily_target_occupancy": 20,
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  }
+]

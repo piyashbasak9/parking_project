@@ -1,0 +1,8 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #f9f9f9;
+  min-width: 120px;
+  text-align: center;
+}

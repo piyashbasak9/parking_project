@@ -7,6 +7,9 @@ class Facility(models.Model):
     def __str__(self):
         return self.name
 
+
+
+
 class Zone(models.Model):
     facility = models.ForeignKey(Facility, on_delete=models.CASCADE, related_name='zones')
     name = models.CharField(max_length=50)
@@ -14,6 +17,10 @@ class Zone(models.Model):
 
     def __str__(self):
         return f"{self.facility.name} - {self.name}"
+
+
+
+
 
 class Device(models.Model):
     code = models.CharField(max_length=50, unique=True)
@@ -23,6 +30,10 @@ class Device(models.Model):
 
     def __str__(self):
         return self.code
+
+
+
+
 
 class TelemetryData(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE, related_name='telemetry')
@@ -35,6 +46,10 @@ class TelemetryData(models.Model):
     class Meta:
         unique_together = ['device', 'timestamp']
 
+
+
+
+
 class ParkingLog(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE, related_name='parking_logs')
     is_occupied = models.BooleanField()
@@ -43,6 +58,10 @@ class ParkingLog(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
+
+
+
+
 
 class Alert(models.Model):
     SEVERITY_CHOICES = [
@@ -59,6 +78,10 @@ class Alert(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+
+
 
 class ZoneTarget(models.Model):
     zone = models.OneToOneField(Zone, on_delete=models.CASCADE, related_name='target')

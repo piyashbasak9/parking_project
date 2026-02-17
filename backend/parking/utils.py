@@ -5,7 +5,7 @@ from django.db.models import Count, Q
 from django.db.models.functions import TruncHour
 
 def check_device_offline():
-    """Create CRITICAL alerts for devices with no telemetry in last 2 minutes."""
+    #Create CRITICAL alerts for devices with no telemetry in last 2 minutes.
     threshold = timezone.now() - timedelta(minutes=2)
     devices_without_recent = Device.objects.filter(
         is_active=True
@@ -26,8 +26,11 @@ def check_device_offline():
                 message=f"Device {device.code} offline (no data for >2 minutes)."
             )
 
+
+
+
 def check_abnormal_power(telemetry):
-    """Check if telemetry indicates abnormal power usage."""
+    #Check if telemetry indicates abnormal power usage.
     if telemetry.voltage > 250 or telemetry.current > 10:
         if not Alert.objects.filter(
             device=telemetry.device,
@@ -41,8 +44,12 @@ def check_abnormal_power(telemetry):
                 message=f"Abnormal power usage: V={telemetry.voltage}, I={telemetry.current}"
             )
 
+
+
+
+
 def get_device_health(device):
-    """Calculate health score 0-100 based on recent activity and alerts."""
+    #Calculate health score 0-100 based on recent activity and alerts.
     last_24h = timezone.now() - timedelta(hours=24)
     alert_count = device.alerts.filter(created_at__gt=last_24h).count()
     last_telemetry = device.telemetry.order_by('-timestamp').first()
@@ -53,6 +60,11 @@ def get_device_health(device):
     recency_score = max(0, 100 - minutes_since * 2)
     score = (alert_score + recency_score) / 2
     return max(0, min(100, int(score)))
+
+
+
+
+
 
 def get_dashboard_summary(date_str):
     try:
@@ -85,7 +97,8 @@ def get_dashboard_summary(date_str):
             device__zone=zone,
             timestamp__range=[start_of_day, end_of_day]
         ).count()
-        efficiency = (actual / target * 100) if target > 0 else 0
+
+        efficiency = (actual / target * 100) if target > 0 else 0 # divison by zero handle
 
         zone_occupied = 0
         for device in zone.devices.filter(is_active=True):
@@ -112,6 +125,16 @@ def get_dashboard_summary(date_str):
         'alerts_today': alerts_today,
         'zones': zone_data,
     }
+
+
+
+
+
+
+
+
+
+
 
 def get_hourly_usage(zone_id, date_str):
     try:

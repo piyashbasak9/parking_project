@@ -16,6 +16,10 @@ def telemetry_create(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+
+
 @api_view(['POST'])
 def telemetry_bulk(request):
     data = request.data
@@ -35,6 +39,11 @@ def telemetry_bulk(request):
     status_code = status.HTTP_207_MULTI_STATUS if errors else status.HTTP_201_CREATED
     return Response(response, status=status_code)
 
+
+
+
+
+
 @api_view(['POST'])
 def parking_log_create(request):
     serializer = ParkingLogSerializer(data=request.data)
@@ -43,11 +52,21 @@ def parking_log_create(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+
+
+
 @api_view(['GET'])
 def dashboard_summary(request):
     date = request.query_params.get('date')
     summary = get_dashboard_summary(date)
     return Response(summary)
+
+
+
+
+
 
 class AlertViewSet(viewsets.ModelViewSet):
     queryset = Alert.objects.all()
@@ -62,6 +81,11 @@ class AlertViewSet(viewsets.ModelViewSet):
         alert.save()
         return Response({'status': 'acknowledged'})
 
+
+
+
+
+
 @api_view(['GET'])
 def hourly_usage(request):
     zone_id = request.query_params.get('zone')
@@ -70,6 +94,10 @@ def hourly_usage(request):
         return Response({"error": "zone parameter required"}, status=400)
     data = get_hourly_usage(zone_id, date)
     return Response(data)
+
+
+
+
 
 @api_view(['GET'])
 def devices(request):
